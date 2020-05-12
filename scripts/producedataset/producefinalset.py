@@ -30,11 +30,17 @@ outfolder = args.outfolder
 outname = args.outname
 
 
+
+DCfile = constant.datafolder + '/DC/DCfile.pkl'
+cuts = "RUNID >" +str(limidbasse) + " & " + "RUNID < " +str(limid)  + " & " + constant.basecuts + " & " +  constant.badimage + " & " + constant.radoncut + " & " + " DC < " +str(DClim )
+datafolder = constant.basefolderpostidm
+
 DCfile = constant.datafolder + '/DC/DCfile.pkl'
 dfDC = pd.read_pickle(DCfile)
 df = pd.read_pickle(file)
 
 df = df.query(constant.basecuts) # position cut, mask,  ll cut,  qmax
+
 df = df.query(constant.radoncut) # radon cut removes some runid
 datadcdf = dfDC
 size = datadcdf.shape[0]

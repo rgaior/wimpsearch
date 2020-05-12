@@ -2,12 +2,12 @@
 ## root tree data ##
 ####################
 listofknowntrees = ['clusters','simclusters','clusters_tree']
-datacolumns = ['RUNID','EXTID','EXPTIME','EXPSTART','efact','nvalidpix','cid','centerx','centery','linlength','is_masked','qguess','sguess','oguessg','oguessc','llg','llc','success','ll','meanx','meanx_err','sigma','sigma_err','efit','qbase','npix','npix4','ene1','ene_integ','chi2g','chi2c','touchmask','sime','simz','simx','simy','simn','simdistx','simdisty','multirows','type','status','ll_enlarg','llc_enlarg','ll_14','llc_14','gchi2','cchi2','qmax','qdelta_dx','qdelta_sx','is_premasked','exposuretime']        
+datacolumns = ['RUNID','EXTID','EXPTIME','EXPSTART','efact','nvalidpix','cid','centerx','centery','linlength','is_masked','qguess','sguess','oguessg','oguessc','llg','llc','success','ll','meanx','meanx_err','sigma','sigma_err','efit','qbase','npix','npix4','ene1','ene_integ','chi2g','chi2c','touchmask','sime','simz','simx','simy','simn','simdistx','simdisty','multirows','type','status','ll_enlarg','llc_enlarg','ll_14','llc_14','gchi2','cchi2','qmax','qdelta_dx','qdelta_sx','is_premasked','exposuretime']
 
 #######################################
 ## constant for the crosstalk codes ###
 #######################################
-commondfcol = ['RUNID','EXTID_HE','CID_HE','E_HE','X_HE','Y_HE','EXTID_LE','CID_LE','E_LE','X_LE','Y_LE','ll','llc'] 
+commondfcol = ['RUNID','EXTID_HE','CID_HE','E_HE','X_HE','Y_HE','EXTID_LE','CID_LE','E_LE','X_LE','Y_LE','ll','llc']
 energyconv = 3.7 #ev per electron
 windowxsearch = 20
 windowysearch = 1
@@ -31,6 +31,7 @@ basefolder = '/Users/gaior/DAMIC/code/wimpsearch/'
 datafolder = basefolder + '/data/'
 
 basefolderidm = '/Users/gaior/DAMIC/data/idm2018/'
+basefolderpostidm = '/Users/gaior/DAMIC/data/postidm2018/'
 outfolder = '/Users/gaior/DAMIC/code/data_analysis/out/'
 DCfolder = '/Users/gaior/DAMIC/data/DC/'
 
@@ -44,11 +45,11 @@ DCfolder = '/Users/gaior/DAMIC/data/DC/'
 positioncut = 'centery < 42 & centery > 1 & (centerx < 8250 & centerx > 4400) & multirows == 0'
 recpositioncut = 'centery < 42 & centery > 1 & (centerx < 8250 & centerx > 4400) & (simdistx == 0 | (simdistx > 5) & (simdisty > 2) )'
 simpositioncut = 'simy < 42 & simy > 1 & (simx < 8250 & simx > 4400) & ((simdistx > 5) & (simdisty > 2) )'
-#positioncut = 'centery < 42 & centery > 2 & multirows == 0' 
+#positioncut = 'centery < 42 & centery > 2 & multirows == 0'
 maskcut = 'is_masked == 0 & touchmask == 0 & success ==1'
 llcut = 'll_14 < 90'
 qmaxcut = 'qmax/(ene1*1000./3.77) > 0.2'
-basecuts = maskcut + ' & ' +  llcut+ ' & ' +  qmaxcut 
+basecuts = maskcut + ' & ' +  llcut+ ' & ' +  qmaxcut
 
 radoncut = " (RUNID<2564 | RUNID>2566) &  (RUNID< 2902 | RUNID> 2903) & (RUNID<3267 | RUNID>3336) & (RUNID<3353 | RUNID>3419) & (RUNID<3654 | RUNID> 3657) & (RUNID<3764 | RUNID>3767) & (RUNID<3826 | RUNID>3853) & (RUNID<3868 | RUNID>3874) & (RUNID<3913 | RUNID>3921) & (RUNID<4003 | RUNID > 4007) & (RUNID<4207 | RUNID > 4212)"
 
@@ -64,7 +65,10 @@ listofexpo = '/Users/gaior/DAMIC/data/postidm2018/listofexpo.npy'
 listofrun = '/Users/gaior/DAMIC/data/postidm2018/listofrun.npy'
 
 
-badimage = 'RUNID!=2473 & RUNID!=2479 & RUNID!=2482 & RUNID!=2559 & RUNID!=2577 & RUNID!=2611 & RUNID!=2623  & RUNID!=2829 & RUNID!=2843 & RUNID!=2849 & RUNID!=2853 & RUNID!=2927 & RUNID!=2902 & RUNID !=3003 & RUNID!=3059 & RUNID!=3112 & RUNID!=3345 & RUNID!=3536'
+badimage = 'RUNID!=2473 & RUNID!=2479 & RUNID!=2482 & RUNID!=2559 & RUNID!=2577 & RUNID!=2611 & RUNID!=2623  & RUNID!=2829 & RUNID!=2843 & RUNID!=2849 & RUNID!=2853 &  RUNID!=2902 & RUNID!=2927 & RUNID !=3003 & RUNID!=3011 & RUNID!=3018 & RUNID!=3020 & RUNID!=3059 & RUNID!=3112 & RUNID!=3203 & RUNID!=3250 & RUNID!=3332 & RUNID!=3345 & RUNID!=3417 & RUNID!=3453 & RUNID!=3473 & RUNID!=3483 & RUNID!=3536 & RUNID!=3545 & RUNID!=3584 & RUNID!=3634 & RUNID!=3636 & RUNID!=3637 & RUNID!=3638 & RUNID!=3639 & RUNID!=3654 & RUNID!=3655 & RUNID!=3656 & RUNID!=3685  & RUNID!=3698 & RUNID!=3707 & RUNID!=3751 & RUNID!=3807 & RUNID!=3852 & RUNID!=3905 & RUNID!=3931 & RUNID!=3958 & RUNID!=4011 & RUNID!=4044 & RUNID!=4074 & RUNID!=4083 & RUNID!=4127'
+
+
+negativepixelimage = '(RUNID!=3024 | EXTID!=11) &(RUNID!=3029 | EXTID!=11) & (RUNID!=3029 | EXTID!=12)  & (RUNID!=3125 | EXTID!=11) & (RUNID!=3125 | EXTID!=12) &(RUNID!=3126 | EXTID!=11) & (RUNID!=3126 | EXTID!=12) & (RUNID!=3537 | EXTID!=2) & (RUNID!=3537 | EXTID!=12)  & (RUNID!=3538 | EXTID!=2) & (RUNID!=3538 | EXTID!=12)  & (RUNID!=3539 | EXTID!=2) & (RUNID!=3539 | EXTID!=12)  & (RUNID!=3540 | EXTID!=2) &(RUNID!=3540 | EXTID!=12) &(RUNID!=3541 | EXTID!=2) & (RUNID!=3541 | EXTID!=12) &  (RUNID!=3542 | EXTID!=2) & (RUNID!=3542 | EXTID!=12) & (RUNID!=3543 | EXTID!=2) & (RUNID!=3543 | EXTID!=12) & (RUNID!=3544 | EXTID!=2) & (RUNID!=3546 | EXTID!=12) & (RUNID!=3548 | EXTID!=12) & (RUNID!=3598 | EXTID!=12) &(RUNID!=3657 | EXTID!=4) & (RUNID!=3657| EXTID!=6) & (RUNID!=3657 | EXTID!=11) & (RUNID!=3657 | EXTID!=12)'
 
 
 

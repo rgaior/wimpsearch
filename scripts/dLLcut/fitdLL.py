@@ -27,7 +27,7 @@ def inv_intexpo(y,a,b,c):
     return  c*np.log(y/(c*a)) + b
 def inv_intexpo2(y,a,b):
     # expo(ax+b)
-    return  (1/a)*np.log( (y*a)/b) 
+    return  (1/a)*np.log( (y*a)/b)
 
 def logtofit(x,a,b,c):
     return np.log(a) + (x - b)/c
@@ -41,9 +41,9 @@ blank = pd.read_pickle(blankfile)
 #data = data.query("DC < " + str(constant.dclimvalue))
 data = data.query("DC < 3")
 
-print "#######################"
-print "cutting image with DC larger than ",  constant.dclimvalue, " ADU/1x100 pixel"
-print "#######################"
+#print "#######################"
+#print "cutting image with DC larger than ",  constant.dclimvalue, " ADU/1x100 pixel"
+#print "#######################"
 
 
 
@@ -51,7 +51,7 @@ binsize = 0.3
 firstbin = -50
 lastbin = 0
 bins = np.arange(firstbin,lastbin,binsize)
-print bins
+#print bins
 plt.hist(data.ll - data.llc, bins=bins,log=True)
 plt.hist(blank.ll - blank.llc ,bins=bins,log=True)
 plt.show()
@@ -96,9 +96,9 @@ plt.show()
 #     plt.errorbar(cbins,resu,yerr=errresu)
 #     plt.errorbar(cbins,n,err,fmt='o')
 #     plt.plot(cbins,resu + errresu,'--')
-#     plt.plot(cbins,resu - errresu,'--')    
+#     plt.plot(cbins,resu - errresu,'--')
 #     print inv_intexpo2(0.01,z[0],np.exp(z[1]))
-# #    print inv_intexpo(0.01,z)    
+# #    print inv_intexpo(0.01,z)
 # print z
 # plt.yscale('log')
 # plt.xlabel('dLL')

@@ -8,6 +8,7 @@ utilspath = cwd + '/../../utils/'
 sys.path.append(utilspath)
 from lmfit import minimize, Parameters
 import constant
+import utils
 import pandas as pd
 import seaborn as sns
 
@@ -29,15 +30,40 @@ def residual(params, x,y, erry):
 
 
 # get the data from the pkl file:
-datafile = constant.datafolder + '/exposed/data1idm.pkl'
-data = pd.read_pickle(datafile)
+limidbasse = 2000
+#if dataset == 'all':
+limid = 5000
+#else:
+#limid = 3704
+
+#DClim = constant.dclimvalue
+extcut = 0
+ext = 4
+DCfile = constant.datafolder + '/DC/DCfile.pkl'
+cuts = "RUNID >" +str(limidbasse) + " & " + "RUNID < " +str(limid) + " & " +  constant.badimage+ " & " + constant.basecuts 
+# +   + " & " + constant.radoncut
+datafolder = constant.basefolderpostidm
+
+
+#datafile = constant.datafolder + '/exposed/data1idm.pkl'
+
+dfdata = pd.read_pickle(datafolder + 'datapostidm2018.pkl')
+dfdata = utils.mergewithDC(DCfile,dfdata)
+#dfdata = utils.dfbasic(dfdata)
+dfdata = dfdata.query(cuts)
+
+#datafile = constant.datafolder + '/exposed/data1.pkl'
+data = dfdata
+#pd.read_pickle(datafile)
+print data.shape[0]
 re = data.groupby(["RUNID","EXTID"])
 a_DC = re.mean().DC
 a_entries = re.DC.value_counts()
 
 
 # obtain the profile
-bins = np.logspace(-2,2.5,30)
+#bins = np.logspace(-2,2.5,30)
+bins = np.logspace(-2,2.5,29)
 ax = sns.regplot(x=a_DC, y=a_entries,x_bins=bins,x_estimator=np.mean,fit_reg=False, marker="o",scatter_kws={'alpha':1})
 a_profx = np.array([])
 a_proferry = np.array([])

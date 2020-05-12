@@ -1,7 +1,7 @@
 Data analysis with the python code:
 1. Produce pkl files:
    we need first to convert root file to pandas dataframe. This is done with the script "writepkl.py"
-   this code allow the user to convert the files from PFS to pandas dataframe, it can convert data or simulation clusters trees.
+   this code allows the user to convert the files from PFS to pandas dataframe, it can convert data or simulation clusters trees.
    During this conversion, an updated energy calibration is applied and the variable dll in inserted with the function "dfbasic"
    
 2. apply basecut and insert the DC information with the script producedataset.py

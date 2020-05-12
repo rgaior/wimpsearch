@@ -31,13 +31,18 @@ outname = args.outname
 DCfile = constant.datafolder + '/DC/DCfile.pkl'
 dfDC = pd.read_pickle(DCfile)
 df = pd.read_pickle(file)
+df = df.query(constant.positioncut)
 df = df.query(constant.basecuts)
-df = df.query(constant.radoncut) # radon cut removes some runid
+df = df.query(constant.badimage)
+df = df.query(constant.radoncut)
+df = df.query(constant.negativepixelimage)
+
 datadcdf = dfDC
 size = datadcdf.shape[0]
 datadcdf = datadcdf.merge(df,left_on=['image','ext'], right_on=['RUNID','EXTID'], how='outer')
 datadcdf = datadcdf.dropna()
+print ('additional cut : ' , cut)
 
 df = datadcdf.query(cut)
 
-df.to_pickle(outfolder +  outname + '.pkl')
+df.to_pickle(outfolder +  outname + '.pkl',protocol=3)

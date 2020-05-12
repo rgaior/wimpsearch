@@ -34,23 +34,23 @@ onedfperfile = args.onedfperfile
 sim = args.sim
 # define the folder with files depending on the options
 files = glob.glob(infolder + '/*.root*')
-print args
+print (args)
 if Nfile:
     files = files[:Nfile]
 if infile:
     files = [infolder + infile]
-print files
+print (files)
 # dataframe with the information of all the root tree
 dfall = pd.DataFrame()
 dfallsim = pd.DataFrame()
 
-print 'number of files to be converted: ', len(files)
+print ('number of files to be converted: ', len(files))
 # loop over the defined files array
 
 for f in files:
     fname = f[f.rfind('/')+1:f.rfind('.')]
     dft = utils.readtree(f,'clusters')    
-    print f
+    print (f)
     if sim:
         dftsim = utils.readtree(f,'simclusters')    
         dftsim = utils.dfbasic(dftsim)
@@ -78,7 +78,7 @@ if not onedfperfile:
     start = time.time()
     dfall = utils.dfbasic(dfall)
     end = time.time()
-    print 'elapsed time = ', end - start
+    print ('elapsed time = ', end - start)
     dfall.to_pickle(outfolder + outname+'.pkl')
     if sim:
         dfallsim = utils.dfbasic(dfallsim)
